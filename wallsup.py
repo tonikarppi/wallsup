@@ -10,6 +10,7 @@ from os.path import join
 from urllib.request import pathname2url
 from getpass import getuser
 from syslog import LOG_INFO, syslog
+from pathlib import Path
 
 # Change this to the top-level directory containing your wallpapers.
 WALLPAPERS_PATH = f"/home/{getuser()}/Pictures/wallpapers"
@@ -21,10 +22,9 @@ def get_files_recursively(root_path):
             yield join(current_path, file_name)
 
 
-def file_has_extension(file, *extensions):
-    has_dot = "." in file
-    file_extension = file.rsplit(".", maxsplit=1)[-1].lower()
-    return has_dot and file_extension in extensions
+def file_has_extension(file_path, *extensions):
+    path = Path(file_path)
+    return path.suffix in extensions
 
 
 def set_wallpaper(wallpaper_path):
@@ -39,7 +39,9 @@ def log_message(message):
 
 def main():
     files = get_files_recursively(WALLPAPERS_PATH)
-    wallpaper_files = [file for file in files if file_has_extension(file, "jpg", "png")]
+    wallpaper_files = [
+        file for file in files if file_has_extension(file, ".jpg", ".png")
+    ]
     random_wallpaper = random.choice(wallpaper_files)
     set_wallpaper(random_wallpaper)
     log_message(f"Wallpaper was set to: {random_wallpaper}")
