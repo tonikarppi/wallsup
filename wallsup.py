@@ -42,6 +42,10 @@ def main():
     wallpaper_files = [
         file for file in files if file_has_extension(file, ".jpg", ".png")
     ]
+
+    if len(wallpaper_files) == 0:
+        return
+
     random_wallpaper = random.choice(wallpaper_files)
     set_wallpaper(random_wallpaper)
     log_message(f"Wallpaper was set to: {random_wallpaper}")
