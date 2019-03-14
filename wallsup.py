@@ -35,8 +35,13 @@ def log_message(message):
     syslog(LOG_INFO, message)
 
 
-files = get_files_recursively(WALLPAPERS_PATH)
-wallpaper_files = [file for file in files if file_has_extension(file, "jpg", "png")]
-random_wallpaper = random.choice(wallpaper_files)
-set_wallpaper(random_wallpaper)
-log_message(f"Wallpaper was set to: {random_wallpaper}")
+def main():
+    files = get_files_recursively(WALLPAPERS_PATH)
+    wallpaper_files = [file for file in files if file_has_extension(file, "jpg", "png")]
+    random_wallpaper = random.choice(wallpaper_files)
+    set_wallpaper(random_wallpaper)
+    log_message(f"Wallpaper was set to: {random_wallpaper}")
+
+
+if __name__ == "__main__":
+    main()
