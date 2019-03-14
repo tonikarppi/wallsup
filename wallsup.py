@@ -16,9 +16,9 @@ WALLPAPERS_PATH = f"/home/{getuser()}/Pictures/wallpapers"
 
 
 def get_files_recursively(root_path):
-    for current_path, dirs, files in os.walk(root_path):
-        for file in files:
-            yield join(current_path, file)
+    for current_path, dir_names, file_names in os.walk(root_path):
+        for file_name in file_names:
+            yield join(current_path, file_name)
 
 
 def file_has_extension(file, *extensions):
