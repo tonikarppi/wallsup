@@ -4,13 +4,13 @@ file from a directory tree and sets it as the wallpaper.
 """
 
 import os
-import subprocess as sp
 import random
-from os.path import join
-from urllib.request import pathname2url
+import subprocess as sp
 from getpass import getuser
-from syslog import LOG_INFO, syslog
+from os.path import join
 from pathlib import Path
+from syslog import LOG_INFO, syslog
+from urllib.request import pathname2url
 
 # Change this to the top-level directory containing your wallpapers.
 WALLPAPERS_PATH = f"/home/{getuser()}/Pictures/wallpapers"
