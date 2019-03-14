@@ -6,6 +6,7 @@ file from a directory tree and sets it as the wallpaper.
 import os
 import subprocess as sp
 import random
+from os.path import join
 from urllib.request import pathname2url
 from getpass import getuser
 from syslog import LOG_INFO, syslog
@@ -18,7 +19,7 @@ def get_files_recursively(root_path):
     files_in_paths = ((path, files) for path, dirs, files in os.walk(root_path))
     for path, files in files_in_paths:
         for file in files:
-            yield f"{path}/{file}"
+            yield join(path, file)
 
 
 def file_has_extension(file, *extensions):
