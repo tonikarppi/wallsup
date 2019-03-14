@@ -24,7 +24,7 @@ def get_files_recursively(root_path):
 
 def file_has_extension(file_path, *extensions):
     path = Path(file_path)
-    return path.suffix in extensions
+    return path.suffix.lower() in extensions
 
 
 def set_wallpaper(wallpaper_path):
