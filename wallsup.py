@@ -15,13 +15,14 @@ WALLPAPERS_PATH = f"/home/{getuser()}/Pictures/wallpapers"
 
 
 def get_files_recursively(root_path):
-    files_in_paths = [(root, files) for root, dirs, files in os.walk(root_path)]
-    return [
-        f"{path}/{file}"
-        for path, files in files_in_paths
-        for file in files
-        if file.lower().endswith((".png", ".jpg"))
-    ]
+    files_in_paths = ((root, files) for root, dirs, files in os.walk(root_path))
+    return (f"{path}/{file}" for path, files in files_in_paths for file in files)
+
+
+def file_has_extension(file, *extensions):
+    has_dot = "." in file
+    file_extension = file.rsplit(".", maxsplit=1)[-1].lower()
+    return has_dot and file_extension in extensions
 
 
 def set_wallpaper(wallpaper_path):
@@ -34,7 +35,8 @@ def log_message(message):
     syslog(LOG_INFO, message)
 
 
-wallpaper_files = get_files_recursively(WALLPAPERS_PATH)
+files = get_files_recursively(WALLPAPERS_PATH)
+wallpaper_files = [file for file in files if file_has_extension(file, "jpg", "png")]
 random_wallpaper = random.choice(wallpaper_files)
 set_wallpaper(random_wallpaper)
 log_message(f"Wallpaper was set to: {random_wallpaper}")
