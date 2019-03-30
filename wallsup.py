@@ -11,7 +11,6 @@ import subprocess as sp
 from getpass import getuser
 from os.path import join
 from pathlib import Path
-from syslog import LOG_INFO, syslog
 from urllib.request import pathname2url
 
 # Change this to the top-level directory containing your wallpapers.
@@ -51,10 +50,6 @@ def set_wallpaper(wallpaper_path):
     )
 
 
-def log_message(message):
-    syslog(LOG_INFO, message)
-
-
 def main():
     files = get_files_recursively(WALLPAPERS_PATH)
     wallpaper_files = [
@@ -66,7 +61,7 @@ def main():
 
     random_wallpaper = random.choice(wallpaper_files)
     set_wallpaper(random_wallpaper)
-    log_message(f"Wallpaper was set to: {random_wallpaper}")
+    print(f"Wallpaper was set to: {random_wallpaper}")
 
 
 if __name__ == "__main__":
