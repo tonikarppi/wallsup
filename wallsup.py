@@ -31,8 +31,24 @@ def file_has_extension(file_path, *extensions):
 
 def set_wallpaper(wallpaper_path):
     url = f"file://{pathname2url(wallpaper_path)}"
-    sp.run(f"gsettings set org.gnome.desktop.background picture-uri {url}".split())
-    sp.run(f"gsettings set org.gnome.desktop.screensaver picture-uri {url}".split())
+    sp.run(
+        [
+            "/usr/bin/gsettings",
+            "set",
+            "org.gnome.desktop.background",
+            "picture-uri",
+            url,
+        ]
+    )
+    sp.run(
+        [
+            "/usr/bin/gsettings",
+            "set",
+            "org.gnome.desktop.screensaver",
+            "picture-uri",
+            url,
+        ]
+    )
 
 
 def log_message(message):
