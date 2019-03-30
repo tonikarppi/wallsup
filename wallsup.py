@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 This is a simple script for the Gnome desktop environment that randomly picks an image
 file from a directory tree and sets it as the wallpaper.
