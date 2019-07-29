@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.request import pathname2url
 
 # Change this to the top-level directory containing your wallpapers.
-WALLPAPERS_PATH = f"/home/{getuser()}/Pictures/Wallpapers"
+WALLPAPERS_PATH = f"/home/{getuser()}/.wallpapers"
 
 
 def get_files_recursively(root_path):
